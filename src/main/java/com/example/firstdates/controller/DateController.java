@@ -48,3 +48,9 @@ public class DateController {
         return "";
     }
 }
+
+//- Metodo para eliminar una cita creada por un usuario.
+//-Método para que un usuario se meta en una cita creada por otro usuario
+//-Método para que el usuario cambie el status de la cita.
+//-Método para ver todas las citas disponibles para un usuario
+//- Método para ver todas las citas donde el status sea 1.
