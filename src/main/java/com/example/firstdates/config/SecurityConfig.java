@@ -34,12 +34,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/availabledates", "/register").permitAll()
+                        .requestMatchers(  "/register").permitAll()
                         .requestMatchers("/js/**", "/css/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/availabledates",true)
                         .permitAll()
                 )
                 .logout((logout) -> logout.permitAll());

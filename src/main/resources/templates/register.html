@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>User Register</title>
+    <script src ="/js/register.js"></script>
+</head>
+<body>
+<h1>New User</h1>
+<form th:action="@{/register}" method="post" id="formregister" enctype="multipart/form-data">
+    <input type="text" name="username" id="username" placeholder="username">
+    <input type="password" name="password" id="password" placeholder="password">
+    <input type="password" name="repass" id="repass" placeholder="password again">
+    <input type="file" name="image" id="image" accept="image/*" placeholder="Choose your profile image">
+    <input type="text" name="tlf" id="tlf" placeholder="phone">
+    <input type="submit" value="New User">
+</form>
+</body>
+</html>

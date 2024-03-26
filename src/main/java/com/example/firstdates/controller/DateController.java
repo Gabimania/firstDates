@@ -26,12 +26,12 @@ public class DateController {
 
     @GetMapping("/availabledates")
     public String showAvailableDates(Model model){
-        List<FirstDate> availableDate = userService.getAvailableDates();
-        model.addAttribute("availableDates", availableDate);
+      List<FirstDate> availableDate = userService.getAvailableDates();
+       model.addAttribute("availableDates", availableDate);
         return "availableDates";
     }
 
-    @GetMapping("user-dates")
+    @GetMapping("userdates")
     public String showDatesCreatedByUser(Model model, @RequestParam("iduser") Integer iduser){
         List<FirstDate> userdates = userService.getUserDates(iduser);
         model.addAttribute("userDates", userdates);
