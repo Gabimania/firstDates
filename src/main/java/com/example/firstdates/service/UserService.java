@@ -1,6 +1,6 @@
 package com.example.firstdates.service;
 
-import com.example.firstdates.model.Date;
+import com.example.firstdates.model.FirstDate;
 import com.example.firstdates.model.User;
 import com.example.firstdates.repository.DateRepository;
 import com.example.firstdates.repository.UserRepository;
@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +19,13 @@ import java.util.List;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final DateRepository dateRepository;
+    private BCryptPasswordEncoder passwordEncoder;
 
-
+    @Autowired
     public UserService(UserRepository userRepository, DateRepository dateRepository) {
         this.userRepository = userRepository;
         this.dateRepository = dateRepository;
+        passwordEncoder=new BCryptPasswordEncoder();
     }
 
     @Override
@@ -37,14 +41,26 @@ public class UserService implements UserDetailsService {
     }
 
     public void createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    public List<Date> getAvailableDates() {
+    public List<FirstDate> getAvailableDates() {
         return dateRepository.findByUserReceiveDateIsNull();
     }
 
-    public List<Date> getUserDates(Integer iduser) {
+    public List<FirstDate> getUserDates(Integer iduser) {
         return dateRepository.findByUserCreateDateIduser(iduser);
+    }
+
+
+    public void createDate(Integer userId, LocalDate date) {
+        User user = userRepository.findById(userId)
+                    .orElseThrow(()-> new RuntimeException("User not found"+ userId));
+        FirstDate newDate = new FirstDate();
+        newDate.setUserCreateDate(user);
+        newDate.setDate(date);
+        dateRepository.save(newDate);
+
     }
 }

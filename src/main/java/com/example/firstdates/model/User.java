@@ -13,7 +13,7 @@ public class User {
     private String username;
 
     private String password;
-    private String img;
+    private String img;;
 
     private String tlf;
 
@@ -51,6 +51,7 @@ public class User {
     public void setImg(String img) {
         this.img = img;
     }
+
 
     public String getTlf() {
         return tlf;

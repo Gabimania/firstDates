@@ -1,14 +1,13 @@
 package com.example.firstdates.repository;
 
-import com.example.firstdates.model.Date;
-import com.example.firstdates.model.User;
+import com.example.firstdates.model.FirstDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface DateRepository extends JpaRepository<Date, Integer> {
+public interface DateRepository extends JpaRepository<FirstDate, Integer> {
 
-    List<Date> findByUserReceiveDateIsNull();
+    List<FirstDate> findByUserReceiveDateIsNull();
 
-    List<Date> findByUserCreateDateIduser(Integer iduser);
+    List<FirstDate> findByUserCreateDateIduser(Integer iduser);
 }
