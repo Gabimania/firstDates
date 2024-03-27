@@ -38,14 +38,19 @@ public class DateController {
         return "userDates";
     }
 
+    @GetMapping("/createDateForm")
+    public String showCreateDateForm() {
+        return "formdate"; // Nombre de la vista del formulario de creación de citas
+    }
+
     @PostMapping("/formdate")
     public String createDate(@RequestParam("date") String dateString) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
+        User user = userService.getUserByUsername(authentication.getName());
         LocalDate date = LocalDate.parse(dateString);
         userService.createDate(user.getIduser(),date);
 
-        return "";
+        return "availableDates";
     }
 }
 

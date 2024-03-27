@@ -53,6 +53,9 @@ public class UserService implements UserDetailsService {
         return dateRepository.findByUserCreateDateIduser(iduser);
     }
 
+    public User getUserByUsername(String name){
+        return userRepository.findByUsername(name);
+    }
 
     public void createDate(Integer userId, LocalDate date) {
         User user = userRepository.findById(userId)
