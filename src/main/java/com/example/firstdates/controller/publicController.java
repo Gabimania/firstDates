@@ -32,7 +32,7 @@ public class publicController {
                 "    <div class=\"conversation-item\">\n" +
                 "      <div class=\"avatar\">A</div>\n" +
                 "      <div class=\"details\">\n" +
-                "        <h3>Contacto 1</h3>\n" +
+                "        <h3/>Contacto 1</h3>\n" +
                 "        <p>Último mensaje: Hola, ¿cómo estás?</p>\n" +
                 "        <p>Hace 5 minutos</p>\n" +
                 "      </div>\n" +
@@ -42,21 +42,54 @@ public class publicController {
 
     @GetMapping("/request")
     public String request() {
-        return  "<h2>Solicitudes pendientes</h2>\n" +
-                "  <div class=\"solicitud\">\n" +
-                "      <div class=\"avatar\">A</div>\n" +
-                "      <div class=\"details\">\n" +
-
-                "    <p>Usuario1 ha enviado una solicitud de amistad</p>\n" +
-                "    <button class=\"boton-aceptar\">Aceptar</button>\n" +
-                "    <button class=\"boton-rechazar\">Rechazar</button>\n" +
-                "  </div>"
+        return  "<div class=\"conversation-list\">\n" +
+                "    <div class=\"conversation-item\">\n" +
+                "        <div class=\"avatar\">A</div>\n" +
+                "        <div class=\"details\">\n" +
+                "            <h3>Contacto 1</h3>\n" +
+                "            <p>Usuario1 ha enviado una solicitud de amistad</p>\n" +
+                "            <button class=\"btnAceptar\">Aceptar</button>\n" +
+                "            <button class=\"btnRechazar\">Rechazar</button>\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "</div>\n"
 
                 ;}
 
     @GetMapping("/avaible")
     public String avaible() {
-        return "<h1>hola mundo</h1>"
+        return"<div class=\"conversation-list\">\n" +
+                "    <div class=\"conversation-item\">\n" +
+                "      <div class=\"avatar\">A</div>\n" +
+                "      <div class=\"details\">\n" +
+                "        <h3>Contacto 1</h3>\n" +
+                "        <p>Usuario1 disponible para cita</p>\n" +
+                "        <button class=\"btnSolicitar\">Solicitar Unirse</button>\n" +
+                "      </div>\n" +
+                "    </div>\n"
+                ;}}
 
-                ;}
+    /*
+    @GetMapping("/user")
+    public String user(){
+        return
+
+                "    <div class=\"chat-container\">\n" +
+                "        <div class=\"contact-name\">Nombre del Contacto</div>\n" +
+                "        <div class=\"chat-messages\">\n" +
+                "            <div class=\"message received\">\n" +
+                "                <div class=\"message-content\">¡Hola! ¿Cómo estás?</div>\n" +
+                "            </div>\n" +
+                "            <div class=\"message sent\">\n" +
+                "                <div class=\"message-content\">Hola, estoy bien. ¿Y tú?</div>\n" +
+                "            </div>\n" +
+                "            <!-- Más mensajes pueden ir aquí -->\n" +
+                "        </div>\n" +
+                "        <div class=\"input-container\">\n" +
+                "            <input type=\"text\" placeholder=\"Escribe tu mensaje...\">\n" +
+                "            <button>Enviar</button>\n" +
+                "        </div>\n" +
+                "    </div>";
+    }
 }
+*/

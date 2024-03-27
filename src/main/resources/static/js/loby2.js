@@ -87,6 +87,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+/*
+document.addEventListener("DOMContentLoaded", function() {
+    const cargarChatPrvBtn = document.getElementById("my-chat");
+    const contenidoAvaibleDateDiv = document.getElementById("contenidoPublico");
+
+    cargarChatPrvBtn.addEventListener("click", function() {
+        fetch("user")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("No se pudo cargar el chat público.");
+                }
+                return response.text();
+            })
+            .then(data => {
+                contenidoAvaibleDateDiv.innerHTML = data;
+            })
+            .catch(error => {
+                console.error("Error al cargar el chat público:", error);
+            });
+    });
+});*/
+
 
 
 

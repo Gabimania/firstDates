@@ -1,3 +1,17 @@
+html {
+    background: linear-gradient(to bottom, #3a1c71, #d76d77, #ffaf7b);
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+
+
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -36,57 +50,32 @@
 .content {
     margin-top: 20px;
 }
-
-
-
 .chat-container {
     margin-top: 20px;
 }
-
 .chat {
     display: flex;
     margin-bottom: 10px;
 }
-
 .profile-img img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
 }
-
-.message {
-    background-color: #f0f0f0;
-    border-radius: 20px;
-    padding: 10px 15px;
-}
-
-.sender {
-    font-weight: bold;
-}
-
 .text {
     margin-top: 5px;
 }
 
 
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
 .conversation-list {
     padding: 20px;
 }
-
 .conversation-item {
     display: flex;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
-
 .avatar {
     width: 40px;
     height: 40px;
@@ -98,7 +87,6 @@ body {
     margin-right: 10px;
     margin-left: 10px;
 }
-
 .details {
     flex: 1;
 }
@@ -113,27 +101,16 @@ p {
 }
 
 
-
-
-
-
-
-.solicitud {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-.nombre {
-    font-weight: bold;
-}
 .botones {
     margin-top: 5px;
 }
-.boton-aceptar, .boton-rechazar {
+.btnAceptar, .btnRechazar ,.btnSolicitar {
     padding: 5px 10px;
     margin-right: 10px;
     cursor: pointer;
 }
+
+
 
 
 
@@ -877,3 +854,77 @@ p {
         transform: translateY(0);
     }
 }
+-----------------------------------------------------------------------
+
+
+    .chat-container {   background: linear-gradient(to bottom,  #D76D77, #FFAF7B);
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-name {
+        padding: 10px;
+        font-weight: bold;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .chat-messages {
+        padding: 10px;
+        max-height: 600px;
+        height: 100%;
+
+        overflow-y: auto;
+    }
+
+    .message {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        max-width: 70%;
+    }
+
+    .message-content {
+        word-wrap: break-word;
+    }
+
+    .received {
+        background-color: #fff;
+        align-self: flex-start;
+    }
+
+    .sent {
+        background-color: #DCF8C6;
+        align-self: flex-end;
+    }
+
+    .input-container {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .input-container input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        margin-right: 10px;
+    }
+
+    .input-container button {
+        padding: 8px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .input-container button:hover {
+        background-color: #0056b3;
+    }
