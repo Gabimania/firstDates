@@ -11,11 +11,11 @@ public class FirstDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer iddate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user1")
     private  User userCreateDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user2")
     private User userReceiveDate;
 
@@ -58,6 +58,7 @@ public class FirstDate {
     public boolean isStatus() {
         return status;
     }
+
 
     public void setStatus(boolean status) {
         this.status = status;

@@ -5,6 +5,8 @@ import com.example.firstdates.model.User;
 import com.example.firstdates.repository.DateRepository;
 import com.example.firstdates.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -49,8 +51,16 @@ public class UserService implements UserDetailsService {
         return dateRepository.findByUserReceiveDateIsNull();
     }
 
-    public List<FirstDate> getUserDates(Integer iduser) {
-        return dateRepository.findByUserCreateDateIduser(iduser);
+    public List<FirstDate> getAvailableDatesCreatedByOtherUsers(User currentUser) {
+        List<FirstDate> availableDates = dateRepository.findByUserReceiveDateIsNull();
+        availableDates.removeIf(date -> date.getUserCreateDate().equals(currentUser));
+
+        return availableDates;
+
+    }
+
+    public List<FirstDate> getUserDates(User currentUser) {
+        return dateRepository.findByUserCreateDate(currentUser);
     }
 
     public User getUserByUsername(String name){
@@ -66,4 +76,36 @@ public class UserService implements UserDetailsService {
         dateRepository.save(newDate);
 
     }
+
+
+    public void deleteDate(Integer idDate){
+        FirstDate firstDate = dateRepository.findById(idDate)
+                .orElseThrow(() -> new IllegalArgumentException("Id not found" + idDate));
+                dateRepository.deleteById(firstDate.getIddate());
+
+    }
+
+    public void joinDate(Integer dateId, User joiningUser) {
+        FirstDate dateToJoin = dateRepository.findById(dateId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid date Id:" + dateId));
+        dateToJoin.setUserReceiveDate(joiningUser);
+        dateRepository.save(dateToJoin);
+
+}
+
+    public List<FirstDate> getUserDatesWithPendingStatus(User user) {
+        List<FirstDate> userDates = dateRepository.findByUserCreateDate(user);
+        List<FirstDate> pendingDates = new ArrayList<>();
+
+        // Filtrar las citas con estado pendiente
+        for (FirstDate date : userDates) {
+            if (date.getUserReceiveDate() != null && date.isStatus() != true || date.isStatus() !=false) {
+                pendingDates.add(date);
+            }
+        }
+
+        return pendingDates;
+    }
+
+
 }

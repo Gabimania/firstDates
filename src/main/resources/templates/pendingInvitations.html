@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pending Invitations</title>
+</head>
+<body>
+<h1>Pending Invitations</h1>
+<div th:if="${#lists.isEmpty(pendingInvitations)}">
+    <p>No pending invitations.</p>
+</div>
+<div th:if="${not #lists.isEmpty(pendingInvitations)}">
+    <ul>
+        <li th:each="date : ${pendingInvitations}">
+            <span th:text="${date.userReceiveDate.username}"></span>
+            <span th:text="${date.date}"></span>
+            <button th:onclick="'/acceptDate?dateId=' + ${date.iddate}">Accept</button>
+            <button th:onclick="'/rejectDate?dateId=' + ${date.iddate}">Reject</button>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

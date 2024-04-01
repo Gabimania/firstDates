@@ -2,6 +2,7 @@ package com.example.firstdates.controller;
 
 import com.example.firstdates.model.FirstDate;
 import com.example.firstdates.model.User;
+import com.example.firstdates.repository.DateRepository;
 import com.example.firstdates.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,43 +20,86 @@ import java.util.List;
 public class DateController {
     private final UserService userService;
 
+    private final DateRepository dateRepository;
+
     @Autowired
-    public DateController(UserService userService) {
+    public DateController(UserService userService, DateRepository dateRepository) {
         this.userService = userService;
+        this.dateRepository = dateRepository;
     }
 
     @GetMapping("/availabledates")
-    public String showAvailableDates(Model model){
-      List<FirstDate> availableDate = userService.getAvailableDates();
-       model.addAttribute("availableDates", availableDate);
+    public String showAvailableDates(Model model) {
+        List<FirstDate> availableDate = userService.getAvailableDates();
+        model.addAttribute("availableDates", availableDate);
         return "availableDates";
     }
 
     @GetMapping("userdates")
-    public String showDatesCreatedByUser(Model model, @RequestParam("iduser") Integer iduser){
-        List<FirstDate> userdates = userService.getUserDates(iduser);
+    public String showDatesCreatedByUser(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByUsername(authentication.getName());
+        List<FirstDate> userdates = userService.getUserDates(currentUser);
         model.addAttribute("userDates", userdates);
         return "userDates";
     }
 
     @GetMapping("/createDateForm")
     public String showCreateDateForm() {
-        return "formdate"; // Nombre de la vista del formulario de creación de citas
+        return "formdate";
     }
 
     @PostMapping("/formdate")
-    public String createDate(@RequestParam("date") String dateString) {
+    public String createDate(@RequestParam("date") String dateString, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getUserByUsername(authentication.getName());
         LocalDate date = LocalDate.parse(dateString);
-        userService.createDate(user.getIduser(),date);
+        userService.createDate(user.getIduser(), date);
+
+        List<FirstDate> avaibleDates = userService.getAvailableDatesCreatedByOtherUsers(user);
+
+        model.addAttribute("availableDates", avaibleDates);
 
         return "availableDates";
     }
+    //- Metodo para eliminar una cita creada por un usuario.
+    @PostMapping("/deleteDate")
+    public String deleteDate(@RequestParam("dateID") Integer iddate, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByUsername(authentication.getName());
+
+        FirstDate dateToDelete = dateRepository.findById(iddate)
+                .orElseThrow(() -> new IllegalArgumentException("Invalidad date id" + iddate));
+        if (!dateToDelete.getUserCreateDate().equals(currentUser)) {
+            throw new IllegalArgumentException("You are not authorized to delete this date.");
+        }
+        userService.deleteDate(dateToDelete.getIddate());
+        List<FirstDate> userDates = userService.getUserDates(currentUser);
+        model.addAttribute("userDates", userDates);
+        return "redirect:/userdates";
+    }
+
+    @PostMapping("/joinDate")
+    public String joinDate(@RequestParam("dateId") Integer dateId, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User joiningUser = userService.getUserByUsername(authentication.getName());
+        userService.joinDate(dateId, joiningUser);
+        return "redirect:/availabledates";
+    }
+    @GetMapping("/userDatesWithPendingStatus")
+    public String showUserDatesWithPendingStatus(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByUsername(authentication.getName());
+        List<FirstDate> userDatesWithPendingStatus = userService.getUserDatesWithPendingStatus(currentUser);
+        model.addAttribute("pendingInvitations", userDatesWithPendingStatus);
+        return "pendingInvitations";
+    }
+
+
 }
 
-//- Metodo para eliminar una cita creada por un usuario.
-//-Método para que un usuario se meta en una cita creada por otro usuario
+
+
+
 //-Método para que el usuario cambie el status de la cita.
-//-Método para ver todas las citas disponibles para un usuario
 //- Método para ver todas las citas donde el status sea 1.
