@@ -26,7 +26,7 @@ public class ImageController {
         String imagePath = appConfig.getUserImageDirectory() + File.separator + imageName;
         FileSystemResource fileSystemResource = new FileSystemResource(new File(imagePath));
         return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_JPEG) // Cambiar según el tipo de imagen
+                .contentType(MediaType.IMAGE_JPEG)
                 .body(fileSystemResource);
     }
 }
