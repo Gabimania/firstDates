@@ -34,7 +34,7 @@ public class publicController {
                 "      <div class=\"details\">\n" +
                 "        <h3 id='my-chat'>Contacto 1</h3>\n" +
                 "        <p>Último mensaje: Hola, ¿cómo estás?</p>\n" +
-                "        <p>Hace 5 minutos</p>\n" +
+                "        <pa>Hace 5 minutos</p>\n" +
                 "      </div>\n" +
                 "    </div>\n"
                 ;}

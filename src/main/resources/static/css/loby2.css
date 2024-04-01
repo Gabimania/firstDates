@@ -97,7 +97,11 @@ h3 {
 
 p {
     margin: 0;
-    color: #666;
+    color: #25d1ff;
+}
+pa {
+    margin: 0;
+    color: #f08eff;
 }
 
 
@@ -105,9 +109,10 @@ p {
     margin-top: 5px;
 }
 .btnAceptar, .btnRechazar ,.btnSolicitar {
-    padding: 5px 10px;
-    margin-right: 10px;
-    cursor: pointer;
+    border-radius: 15px; /* Radio de 10 píxeles para redondear los bordes */
+    padding: 5px 40px; /* Espacio alrededor del texto dentro del botón */
+    background-color: #fff; /* Color de fondo del botón */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
 }
 
 
@@ -867,20 +872,22 @@ p {
     }
 
     .contact-name {
-        padding: 10px;
+        padding-bottom: 10px;
+        padding-left: 18%;
+        left: 10%;
         font-weight: bold;
         border-bottom: 1px solid #ddd;
     }
-
     .chat-messages {
-        padding: 10px;
-        max-height: 600px;
-        height: 100%;
-
-        overflow-y: auto;
+        padding-right: 15%;
+        padding-left: 18%;
+        display: flex;
+        y: auto;
+        flex-direction: column;
+        flex-wrap: wrap;
     }
 
-    .message {
+.message {
         margin-bottom: 10px;
         padding: 10px;
         border-radius: 5px;
@@ -902,9 +909,12 @@ p {
     }
 
     .input-container {
+        left: 15%;
+        width: 75%;
         display: flex;
-        align-items: center;
         padding: 10px;
+        position: fixed;
+        bottom: 0;
     }
 
     .input-container input {
