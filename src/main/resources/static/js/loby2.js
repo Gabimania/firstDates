@@ -35,12 +35,68 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(data => {
                 contenidoDateDiv.innerHTML = data;
+                document.getElementById("my-chat").addEventListener("click", function() {
+                    myChatsAjax();
+                });
+            })
+
+            .catch(error => {
+                console.error("Error al cargar el chat público:", error);
+            });
+
+             function myChatsAjax() {
+
+            const cargarChatPrvBtn = document.getElementById("my-chat");
+            const contenidoChatPriv = document.getElementById("contenidoPublico");
+
+            cargarChatPrvBtn.addEventListener("click", function() {
+                fetch("chatpriv")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("No se pudo cargar el chat público.");
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        contenidoChatPriv.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar el chat público:", error);
+                    });
+            });
+        };
+
+    });
+
+
+
+
+});
+
+
+/*
+document.addEventListener("DOMContentLoaded", function myChatsAjax() {
+
+    const cargarChatPrvBtn = document.getElementById("my-chat");
+    const contenidoChatPriv = document.getElementById("contenidoPublico");
+
+    cargarChatPrvBtn.addEventListener("click", function() {
+        fetch("chatpriv")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("No se pudo cargar el chat público.");
+                }
+                return response.text();
+            })
+            .then(data => {
+                contenidoChatPriv.innerHTML = data;
             })
             .catch(error => {
                 console.error("Error al cargar el chat público:", error);
             });
     });
-});
+});*/
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -87,27 +143,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-/*
-document.addEventListener("DOMContentLoaded", function() {
-    const cargarChatPrvBtn = document.getElementById("my-chat");
-    const contenidoAvaibleDateDiv = document.getElementById("contenidoPublico");
 
-    cargarChatPrvBtn.addEventListener("click", function() {
-        fetch("user")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("No se pudo cargar el chat público.");
-                }
-                return response.text();
-            })
-            .then(data => {
-                contenidoAvaibleDateDiv.innerHTML = data;
-            })
-            .catch(error => {
-                console.error("Error al cargar el chat público:", error);
-            });
-    });
-});*/
+
+
 
 
 
@@ -158,6 +196,24 @@ document.addEventListener("DOMContentLoaded", function() {
     // call the loop for the first time
     loop();
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

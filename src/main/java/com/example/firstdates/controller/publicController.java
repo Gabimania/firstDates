@@ -32,7 +32,7 @@ public class publicController {
                 "    <div class=\"conversation-item\">\n" +
                 "      <div class=\"avatar\">A</div>\n" +
                 "      <div class=\"details\">\n" +
-                "        <h3/>Contacto 1</h3>\n" +
+                "        <h3 id='my-chat'>Contacto 1</h3>\n" +
                 "        <p>Último mensaje: Hola, ¿cómo estás?</p>\n" +
                 "        <p>Hace 5 minutos</p>\n" +
                 "      </div>\n" +
@@ -67,11 +67,10 @@ public class publicController {
                 "        <button class=\"btnSolicitar\">Solicitar Unirse</button>\n" +
                 "      </div>\n" +
                 "    </div>\n"
-                ;}}
+                ;}
 
-    /*
-    @GetMapping("/user")
-    public String user(){
+    @GetMapping("/chatpriv")
+    public String chatpriv(){
         return
 
                 "    <div class=\"chat-container\">\n" +
@@ -92,4 +91,3 @@ public class publicController {
                 "    </div>";
     }
 }
-*/
