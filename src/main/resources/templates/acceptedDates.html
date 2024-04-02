@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accepted Dates</title>
+</head>
+<body>
+<h1>Accepted Dates</h1>
+<div th:if="${#lists.isEmpty(acceptedDates)}">
+    <p>No accepted dates.</p>
+</div>
+<div th:if="${not #lists.isEmpty(acceptedDates)}">
+    <ul>
+        <li th:each="date : ${acceptedDates}">
+            <span th:text="${date.userCreateDate.username}"></span> and <span th:text="${date.userReceiveDate.username}"></span> are in love
+            <img th:src="@{'/imgDates/' + ${date.userCreateDate.img}}" width="100" height="100" />
+            <img th:src="@{'/imgDates/' + ${date.userReceiveDate.img}}" width="100" height="100" />
+
+        </li>
+    </ul>
+</div>
+</body>
+</html>
