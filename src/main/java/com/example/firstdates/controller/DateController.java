@@ -128,5 +128,12 @@ public class DateController {
 
         return "redirect:/userDatesWithPendingStatus";
     }
+
+    @GetMapping("/acceptedDates")
+    public String showAcceptedDates(Model model) {
+        List<FirstDate> acceptedDates = userService.getAcceptedDates();
+        model.addAttribute("acceptedDates", acceptedDates);
+        return "acceptedDates";
+    }
 }
 

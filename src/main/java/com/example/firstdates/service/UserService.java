@@ -107,5 +107,9 @@ public class UserService implements UserDetailsService {
         return pendingDates;
     }
 
+    public List<FirstDate> getAcceptedDates() {
+        return dateRepository.findByStatus(true);
+    }
+
 
 }

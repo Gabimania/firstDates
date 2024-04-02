@@ -14,4 +14,6 @@ public interface DateRepository extends JpaRepository<FirstDate, Integer> {
 
 
     List<FirstDate> findByUserCreateDateAndUserReceiveDateIsNotNullAndStatusIsNull(User user);
+
+    List<FirstDate> findByStatus(boolean b);
 }
