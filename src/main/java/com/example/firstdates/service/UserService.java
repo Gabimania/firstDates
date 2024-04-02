@@ -98,7 +98,7 @@ public class UserService implements UserDetailsService {
         List<FirstDate> pendingDates = new ArrayList<>();
 
         for (FirstDate date : userDates) {
-            // Verifica si el estado es null
+
             if (date.getUserReceiveDate() != null && date.isStatus() == null) {
                 pendingDates.add(date);
             }

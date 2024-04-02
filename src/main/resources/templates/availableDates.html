@@ -14,9 +14,9 @@
         <li th:each="date : ${availableDates}">
             <span th:text="${date.userCreateDate.username}"></span> <!-- Muestra el nombre del usuario -->
             <img th:src="@{'/imgDates/' + ${date.userCreateDate.img}}" width="100" height="100" /> <!-- Muestra la imagen del usuario -->
-            <!-- Agregar un botón "Unirse" -->
+
             <form th:action="@{/joinDate}" method="post">
-                <!-- Agregar un campo oculto para el ID de la cita -->
+
                 <input type="hidden" name="dateId" th:value="${date.iddate}" />
                 <button type="submit">Unirse</button>
             </form>
