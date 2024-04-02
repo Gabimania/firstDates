@@ -95,11 +95,38 @@ public class DateController {
         return "pendingInvitations";
     }
 
+    @GetMapping("/acceptDate")
+    public String acceptDate(@RequestParam("dateId") Integer dateId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByUsername(authentication.getName());
+        List<FirstDate> pendingDates = userService.getUserDatesWithPendingStatus(currentUser);
 
+        for (FirstDate date : pendingDates) {
+            if (date.getIddate().equals(dateId)) {
+                date.setStatus(true);
+                dateRepository.save(date);
+                break;
+            }
+        }
+
+        return "redirect:/userDatesWithPendingStatus";
+    }
+
+    @GetMapping("/rejectDate")
+    public String rejectDate(@RequestParam("dateId") Integer dateId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = userService.getUserByUsername(authentication.getName());
+        List<FirstDate> pendingDates = userService.getUserDatesWithPendingStatus(currentUser);
+
+        for (FirstDate date : pendingDates) {
+            if (date.getIddate().equals(dateId)) {
+                date.setStatus(false);
+                dateRepository.save(date);
+                break;
+            }
+        }
+
+        return "redirect:/userDatesWithPendingStatus";
+    }
 }
 
-
-
-//
-//-Método para que el usuario cambie el status de la cita.
-//- Método para ver todas las citas donde el status sea 1.

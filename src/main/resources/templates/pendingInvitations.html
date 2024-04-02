@@ -14,8 +14,8 @@
         <li th:each="date : ${pendingInvitations}">
             <span th:text="${date.userReceiveDate.username}"></span>
             <span th:text="${date.date}"></span>
-            <button th:onclick="'/acceptDate?dateId=' + ${date.iddate}">Accept</button>
-            <button th:onclick="'/rejectDate?dateId=' + ${date.iddate}">Reject</button>
+            <a th:href="'/acceptDate?dateId=' + ${date.iddate}"><button  type="submit">Accept</button></a>
+            <a th:href="'/rejectDate?dateId=' + ${date.iddate}"><button type="submit">Reject</button></a>
         </li>
     </ul>
 </div>

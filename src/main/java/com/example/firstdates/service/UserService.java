@@ -97,9 +97,9 @@ public class UserService implements UserDetailsService {
         List<FirstDate> userDates = dateRepository.findByUserCreateDate(user);
         List<FirstDate> pendingDates = new ArrayList<>();
 
-        // Filtrar las citas con estado pendiente
         for (FirstDate date : userDates) {
-            if (date.getUserReceiveDate() != null && date.isStatus() != true || date.isStatus() !=false) {
+            // Verifica si el estado es null
+            if (date.getUserReceiveDate() != null && date.isStatus() == null) {
                 pendingDates.add(date);
             }
         }

@@ -21,7 +21,7 @@ public class FirstDate {
 
     private LocalDate date;
 
-    private boolean status;
+    private Boolean status;
 
     public Integer getIddate() {
         return iddate;
@@ -55,12 +55,12 @@ public class FirstDate {
         this.date = date;
     }
 
-    public boolean isStatus() {
+    public Boolean isStatus() {
         return status;
     }
 
 
-    public void setStatus(boolean status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
